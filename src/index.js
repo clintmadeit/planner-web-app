@@ -68,7 +68,9 @@ const main = () => {
 
 const sortTasksOnChange = (event) => {
   const element = event.target;
-  if (!element.matches('#sort-by')) return;
+  if (!element.matches('#sort-by')) {
+    return;
+  }
   const selected = document.querySelector('#sort-by').value;
 
   selected === 'Priority' ?
@@ -103,8 +105,12 @@ const sortTasksBy = (value) => {
 
     // Sorting array by deadline.
     deadlineTasks.sort((a, b) => {
-      if (a.deadline < b.deadline) return -1;
-      if (a.deadline > b.deadline) return 1;
+      if (a.deadline < b.deadline) {
+        return -1;
+      }
+      if (a.deadline > b.deadline) {
+        return 1;
+      }
       return 0;
     });
 
@@ -118,8 +124,12 @@ const sortTasksBy = (value) => {
   const sortByPriority = () => {
     // Sort the array by priority.
     appData.tasks.sort((a, b) => {
-      if (a.priority < b.priority) return -1;
-      if (a.priority > b.priority) return 1;
+      if (a.priority < b.priority) {
+        return -1;
+      }
+      if (a.priority > b.priority) {
+        return 1;
+      }
       return 0;
     });
 
@@ -132,7 +142,9 @@ const sortTasksBy = (value) => {
 };
 
 const sortTasksOnPageLoad = () => {
-  if (appData.tasks.length === 0) return;
+  if (appData.tasks.length === 0) {
+    return;
+  }
   sortTasks();
 };
 
@@ -141,8 +153,10 @@ const sortTasksOnClick = (event) => {
   let elementValue;
 
   if (!element.matches('#priority') &&
-      !element.matches('#deadline') &&
-      !element.matches('i.arrow-down')) return;
+        !element.matches('#deadline') &&
+        !element.matches('i.arrow-down')) {
+    return;
+  }
 
   const priorityArrowIcon = document.querySelector('#priority i');
   const deadlineArrowIcon = document.querySelector('#deadline i');

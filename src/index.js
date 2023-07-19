@@ -208,7 +208,9 @@ const addTask = (event) => {
 
   const text = document.querySelector('#add-task').value;
   // If text field is empty, stop executing the rest of the function.
-  if (checkIfTaskIsEmpty(text)) return;
+  if (checkIfTaskIsEmpty(text)) {
+    return;
+  }
 
   const task = new Task(text, false, 'P2');
   appData.addTask(task);
@@ -326,8 +328,10 @@ const generateTasksHeader = () => {
 
 const markTaskUndone = (event) => {
   const element = event.target;
-  const index = element.dataset.index;
-  if (!element.matches(`img[data-index="${index}"]`)) return;
+  const {index} = element.dataset;
+  if (!element.matches(`img[data-index="${index}"]`)) {
+    return;
+  }
   appData.tasksDone[index].done = !appData.tasksDone[index].done;
 
   const deadlineArrowIcon = generateTasksHeader();
@@ -335,7 +339,7 @@ const markTaskUndone = (event) => {
   const sortedByDeadline = deadlineArrowIcon.classList.contains('visible');
 
   const handleSortedByDeadline = () => {
-    const deadline = appData.tasksDone[index].deadline;
+    const {deadline} = appData.tasksDone[index];
     const firstTaskWithSameDeadline =
         appData.tasks.find((task) => task.deadline === deadline);
     if (firstTaskWithSameDeadline === undefined) {
@@ -350,7 +354,7 @@ const markTaskUndone = (event) => {
   };
 
   const handleSortedByPriority = () => {
-    const priority = appData.tasksDone[index].priority;
+    const {priority} = appData.tasksDone[index];
     const firstTaskWithSamePriority =
         appData.tasks.find((task) => task.priority === priority);
     if (firstTaskWithSamePriority === undefined) {
@@ -378,8 +382,10 @@ const markTaskUndone = (event) => {
 const editTextInDoneTask = (event) => {
   const element = event.target;
   const text = element.value;
-  const index = element.dataset.index;
-  if (!element.matches('.done-text-cell')) return;
+  const {index} = element.dataset;
+  if (!element.matches('.done-text-cell')) {
+    return;
+  }
 
   appData.tasksDone[index].text = text;
   appData.save();
@@ -388,8 +394,10 @@ const editTextInDoneTask = (event) => {
 const deleteDoneTaskIfTaskTextRemoved = (event) => {
   const element = event.target;
   const text = element.value;
-  const index = element.dataset.index;
-  if (!element.matches('.done-text-cell')) return;
+  const {index} = element.dataset;
+  if (!element.matches('.done-text-cell')) {
+    return;
+  }
 
   if (text.trim() === '') {
     appData.tasksDone.splice(index, 1);
